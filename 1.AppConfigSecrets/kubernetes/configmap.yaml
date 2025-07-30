@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: echo-configmap
+data:
+    LOG_LEVEL: DEBUG
+    VALUE_FROM_CONFIG_MAP: configtest1
+
+immutable: true

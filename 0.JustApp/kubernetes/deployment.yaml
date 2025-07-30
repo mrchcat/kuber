@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echo-deploy
+  template:
+    metadata:
+      labels:
+        app: echoApp
+    spec:
+      containers:
+        - name: echo
+          image: mcat1980/echo:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+  strategy: { }
+status: { }
