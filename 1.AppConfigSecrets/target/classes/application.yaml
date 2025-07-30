@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/accountapp
+#    username: postgres
+#    password: Inushing1980
+#  sql.init:
+#    mode: ALWAYS
+#    schema-locations: classpath:database/schema.sql
+#    data-locations: classpath:database/data.sql
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8090/realms/bankapp
+#      client:
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8090/realms/bankapp
+#        registration:
+#          bank_accounts:
+#            provider: keycloak
+#            authorizationGrantType: client_credentials
+#            client-id: bank_accounts
+#            client-secret: EF3owQYOVaDIDnBr14jkSt3kuResW6x0
+#            clientAuthenticationMethod: client_secret_post
+
+#management.endpoints.web.exposure.include: info, health,refresh
+
+logging:
+  pattern.file: "%d{HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    root: ${LOG_LEVEL}
+    org.zalando.logbook: ${LOG_LEVEL}
+
+application:
+  configValue: ${VALUE_FROM_CONFIG_MAP}
+  secretValue: ${VALUE_FROM_SECRET}

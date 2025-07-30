@@ -14,11 +14,11 @@ spec:
     spec:
       containers:
         - name: echo
-          image: mcat1980/echo:latest
+          image: mcat1980/echo:3.0
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "100m"
+              memory: "500Mi"
+              cpu: "500m"
           ports:
             - name: http
               containerPort: 8080
@@ -28,17 +28,21 @@ spec:
                 name: echo-configmap
             - secretRef:
                 name: echo-secret
-#          livenessProbe:
-#            httpGet:
-#              path: /actuator/health/liveness
-#              port: http
-#            initialDelaySeconds: 30
-#            periodSeconds: 10
-#          readinessProbe:
-#            httpGet:
-#              path: /actuator/health/readiness
-#              port: http
-#            initialDelaySeconds: 15
-#            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30 # 120s runs keycloak
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 30 # 120s runs keycloak
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 30
   strategy: { }
 status: { }
